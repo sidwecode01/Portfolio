@@ -4,6 +4,10 @@ import 'aos/dist/aos.css';
 import HearderDesign from './components/hearderDesign'
 import Skills from './components/Skills'
 import { useEffect } from 'react';
+import Experience from './components/Experience';
+import Projects from './components/project';
+import Contact from './components/Contact';
+import About from './components/About';
 
 
 function App() {
@@ -16,6 +20,11 @@ function App() {
       <main>
         <HearderDesign />
         <Skills />
+         <Experience />
+         <Projects />
+         <Contact />
+         <About />
+
       </main>
 
     </>

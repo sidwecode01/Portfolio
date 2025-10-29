@@ -4,7 +4,7 @@ import me from '../assets/meUpdate.png'
 export default function HearderDesign() {
     return (
         <div className='relative overflow-hidden min-h-[550px] sm:min-h-[650px] flex flex-col items-center '>
-            <div className="md:h-[720px] h-[990px] md:w-[1600px] w-[950px] bg-gradient-to-r  absolute bg-blue-950 rounded-full transform rotate-6 -top-40 z-0">
+            <div className="md:h-[740px] h-[990px] md:w-[1600px] w-[950px] bg-gradient-to-r  absolute bg-blue-950 rounded-full transform rotate-6 -top-40 z-0">
             </div>
             <Navbar />
             <section className="flex flex-col md:flex-row items-center justify-center w-full px-4 md:px-52 pt-24 pb-4 md:pd-24 md:pt-32 md:pb-24 mt-24 md:mt-0 z-10">
