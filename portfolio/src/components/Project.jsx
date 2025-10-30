@@ -49,8 +49,7 @@ export default function Projects() {
                     <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
                         <h1 className="sm:w-2/5 text-white font-medium title-font text-3xl mb-2 sm:mb-0">My project</h1>
                         <p className="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, nesciunt dolorum ea est repellendus deserunt assumenda sint qui blanditiis asperiores nihil aliquid? Necessitatibus saepe numquam optio asperiores iure unde officiis?
-                        </p>
+Chaque projet présenté ci-dessous reflète mon parcours, mes apprentissages et ma passion pour le développement. À travers des interfaces web, des applications mobiles, des outils interactifs et des reproductions d’applications populaires, j’ai exploré différentes technologies et méthodologies pour créer des expériences utiles, intuitives et modernes.                        </p>
                         <button type="button" data-aos="fade-up" data-aos-delay="300" className="text-gray-900 bg-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold rounded-full text-xs sm:text-sm px-4 py-2 text-center">
                             View all
                         </button>
