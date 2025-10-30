@@ -1,7 +1,14 @@
 import image1 from "../assets/image.png"
+import ecommerce1 from "../assets/ecommerceFront.png"
+import { Link } from "react-router-dom"
+import trelloMobile from "../assets/trelloMobile.png"
+import rotten from "../assets/rotten.jpeg"
+
 
 const ProjectCard = ({  image, title }) => (
+     
     <div className="p-4 md:w-1/3 mb-6">
+        <Link to={`/projet/${title}`}>
         <div className="rounded-lg h-54  overflow-hidden">
             <img src={image} alt="" className="object-cover h-full w-full " />
         </div>
@@ -12,24 +19,27 @@ const ProjectCard = ({  image, title }) => (
 
                 </svg>
             </a>
+         </Link>
     </div>
+   
 )
 
 export default function Projects() {
     const projects = [
-        {title: "Portfolio", image: image1},
+        {title: "Portfolio", image: image1,},
         {title: "DashBoard", image: image1},
         {title: "Trello Clone Web", image: image1},
-        {title: "Yowl", image: image1},
-        {title: "Cimé Shop", image: image1},
-        {title: "Post It", image: image1},
-        {title: "My SHOP", image: image1},
+        {title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobile},
+        {title: "Yowl – Plateforme sociale de commentaires universels", image: image1},
+        {title: "My rotten tomato", image: rotten},
+        {title: "Post It – Application de planification et de notes universelles", image: image1},
+        {title: "My SHOP – Plateforme e-commerce moderne", image: image1},
         {title: "SHOW TIME", image: image1},
-        {title: "E-Commerce web site (View)", image: image1},
-        {title: "Calculatrice (Python)", image: image1},
+        {title: "E-Commerce Web Site (View) – Interface utilisateur d’une boutique en ligne", image: ecommerce1},
+        {title: "Calculatrice scientifique – Logique NPI (Python)", image: image1},
         {title: "Calculatrice (Javascript)", image: image1},
-        {title: "TICKEY WIFI", image: image1},
-        {title: "E-COMMERCE CLONE", image: image1},
+        {title: "TICKET WIFI – Interface utilisateur pour l’achat de tickets Wi-Fi", image: image1},
+        {title: "E-COMMERCE CLONE – Interface utilisateur d’un site e-commerce", image: image1},
 
     ]
     return(
@@ -46,13 +56,15 @@ export default function Projects() {
                         </button>
                     </div>
                 </div>
-                <div data-aos="fade-up" data-aos-delay="400" className="flex flex-wrap sm;m-4 -mx-4 -mb-10 -mt-4">
+                <div data-aos="fade-up" data-aos-delay="400" className="flex flex-wrap sm:m-4 -mx-4 -mb-10 -mt-4">
+                   
                     {
                         projects.map((project, index )=> (
                             
-                             <ProjectCard  key={index} {...project}/>
+                              <ProjectCard  key={index} {...project}/>
                         ))
                     }
+                    
                 </div>
 
             </div>

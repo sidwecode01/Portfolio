@@ -1,34 +1,21 @@
 import React from 'react'
 import AOS from 'aos';
-import 'aos/dist/aos.css';
-import HearderDesign from './components/hearderDesign'
-import Skills from './components/Skills'
-import { useEffect } from 'react';
-import Experience from './components/Experience';
-import Projects from './components/project';
-import Contact from './components/Contact';
+// import 'aos/dist/aos.css';
+
+// import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Accueil from './components/Accueil';
 import About from './components/About';
 
-
 function App() {
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
-
   return (
-    <>
-      <main>
-        <HearderDesign />
-        <Skills />
-         <Experience />
-         <Projects />
-         <Contact />
-         <About />
-
-      </main>
-
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Accueil />} />
+        <Route path="/projet/:title" element={<About />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App
