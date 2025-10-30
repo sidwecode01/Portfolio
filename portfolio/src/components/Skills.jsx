@@ -1,7 +1,9 @@
 import CV_Resume from "../assets/CV_Resume.pdf"
-import image1 from "../assets/image.png"
-import image2 from "../assets/me.png"
-import image3 from "../assets/meUpdate.png"
+import image1 from "../assets/framework/react1.png"
+import image2 from "../assets/framework/nest1.jpg"
+import image3 from "../assets/framework/laravel.webp"
+import image4 from "../assets/framework/vue.jpg"
+
 
 
 
@@ -46,9 +48,11 @@ export default function Skills() {
 
                     </div>
                     <div data-aos="fade-up" data-aos-delay="300" className="grid gap-4 cols-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4 lg:gap-6 lg:cols-start-2 lg:row-end-6 lg:row-span-6 lg:mb-0">
-                        <img src={image1} alt="" className="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full" loading="lazy" />
+                        {/* <img src={image1} alt="" className="w-full h-60 object-cover rounded-lg sm:h-52 sm:col-span-2 lg:col-span-full" loading="lazy" /> */}
                         <img src={image2} alt="" className="hidden w-full h-52 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:row-start-2 lg:col-span-2 lg:h-32" loading="lazy" />
                         <img src={image3} alt="" className="hidden w-full h-52 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:rw-start-2 lg:col-span-2 lg:h-32" loading="lazy" />
+                        <img src={image1} alt="" className="hidden w-full h-52 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:rw-start-2 lg:col-span-2 lg:h-32" loading="lazy" />
+                        <img src={image4} alt="" className="hidden w-full h-52 object-cover rounded-lg sm:block sm:col-span-2 md:col-span-1 lg:rw-start-2 lg:col-span-2 lg:h-32" loading="lazy" />
                     </div>
                     <div className="mt-4 md:col-start-1 md:row-start-3 self-center lg:mt-2 lg:col-start-1 lg:rox-start-3 lg:row-end-4">
                         <a href={CV_Resume} download>
