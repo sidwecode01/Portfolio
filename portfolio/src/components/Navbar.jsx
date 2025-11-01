@@ -22,9 +22,11 @@ export default function Navbar(){
                     </a>
                 ))}
             </nav>
-            <button className="text-gray-950 mt-4 bg-white hover:bg-blue-300 font-semibold rounded-full  text-sm px-5 py-2.5 text-center">
+            <a href="#contactMe">
+            <button  className="text-gray-950 mt-4 bg-white hover:bg-blue-300 font-semibold rounded-full  text-sm px-5 py-2.5 text-center">
                 Contact
             </button>
+            </a>
                 </div>
         </header>
     )

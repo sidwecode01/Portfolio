@@ -13,9 +13,11 @@ export default function HearderDesign() {
                     <p data-aos="fade-up" data-aos-delay="300" className="text-base sm:text-lg text-gray-300 mb-6">  Développeur Fullstack passionné par la création
                         d’applications utiles et modernes. Formé par Wecode
                         et actuellement en Licence 3 à l’UVCI.</p>
-                    <button className="text-gray-950 mt-4 bg-white hover:bg-blue-300 font-semibold rounded-full  text-sm px-5 py-2.5 text-center">
-                        Contact
-                    </button>
+                    <a href="#contactMe">
+                        <button className="text-gray-950 mt-4 bg-white hover:bg-blue-300 font-semibold rounded-full  text-sm px-5 py-2.5 text-center">
+                            Contact
+                        </button>
+                    </a>
                 </div>
                 <div data-aos="fade-up" className="flex-1 flex justify-center md:justify-end mt-0 md:mt-0">
                     <img src={me} alt="Nothing found to you" className="h-[300px] bg-red-400 sm:h-[450px] w-[250px] sm:w-[360px] object-cover rounded-lg" />
