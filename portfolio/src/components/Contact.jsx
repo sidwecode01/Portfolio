@@ -9,10 +9,10 @@ export default function Contact() {
 
     emailjs
       .sendForm(
-        "service_qcwuo7f",     // Ton Service ID
-        "template_slozavn",    // Ton Template ID
+        "service_qcwuo7f",    
+        "template_slozavn",    
         form.current,
-        "jScHsLI3uwaxSxTSu"    // Ta Public Key
+        "jScHsLI3uwaxSxTSu"    
       )
       .then(() => {
         alert("Message envoyé avec succès !");
