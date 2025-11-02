@@ -1,8 +1,9 @@
 import { useState } from "react";
+import logo from "../assets/Logo.png"
 
 const NavbarLinks = [
   { id: 1, name: "Home", link: "#home" },
-  { id: 2, name: "Skills", link: "#skills" },
+  { id: 2, name: "Compétences", link: "#skills" },
   { id: 3, name: "Experience", link: "#experience" },
   { id: 4, name: "My projects", link: "#projects" },
   { id: 5, name: "Contact", link: "#contact" },
@@ -16,7 +17,12 @@ export default function Navbar() {
       <div className="container mx-auto p-5 flex flex-col md:flex-row items-center justify-between">
         {/* Logo + Burger */}
         <div className="flex justify-between w-full md:w-auto items-center">
-          <a className="text-white font-bold text-3xl">Portfolio</a>
+          <a className="text-white font-bold text-3xl"><img
+  src={logo}
+  alt="Sid-Of-God"
+  className="w-20 h-auto mx-auto my-4 rounded-lg shadow-lg transition-transform hover:scale-105"
+/>
+</a>
 
           {/* Bouton burger */}
           <button

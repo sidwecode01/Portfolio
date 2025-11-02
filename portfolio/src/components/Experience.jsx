@@ -3,7 +3,7 @@
 export default function Experience() {
     return (
         <section id="experience" className="text-gray-600">
-            <div className="container px-5 py-24 mx-auto">
+            <div className="container px-5 py-10 m-auto">
                 <div className="flex flex-col text-center w-full mb-20">
                     <h1 data-aos="fade-up" data-aos-delay="300" className="sm:text-3xl text-3xl font-bold">Experience</h1>
                     <p data-aos="fade-up" data-aos-delay="400" className="lg:w-2/3 mx-auto leading-relaxed text-base">

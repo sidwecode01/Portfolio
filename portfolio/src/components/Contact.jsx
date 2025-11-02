@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { FaUser, FaEnvelope, FaTag, FaCommentDots } from 'react-icons/fa';
 
 export default function Contact() {
   const form = useRef();
@@ -69,24 +70,75 @@ export default function Contact() {
         </div>
 
         {/* Formulaire de contact */}
-        <div id="contactMe" data-aos="fade-up" data-aos-delay="400" className="rounded-2xl w-full mt-16 bg-blue-950 py-10 px-4 md:px-8">
-          <h2 className="text-white text-center font-light text-4xl md:text-5xl lg:text-6xl mb-8">
-            Contact Me
-          </h2>
-          <form ref={form} onSubmit={sendEmail} className="flex flex-col items-center">
-            <div className="md:w-3/4 lg:w-2/3 xl:w-1/2">
-              <div className="flex flex-col md:flex-row">
-                <input name="name" type="text" placeholder="Name" required className="my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full md:w-1/2 md:mr-2 outline-none focus:ring-2 focus:ring-blue-600" />
-                <input name="email" type="email" placeholder="Email" required className="my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full md:w-1/2 md:ml-2 outline-none focus:ring-2 focus:ring-blue-600" />
-              </div>
-              <input name="subject" type="text" placeholder="Subject" className="my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full outline-none focus:ring-2 focus:ring-blue-600" />
-              <textarea name="message" rows="5" placeholder="Say Something" required className="my-2 py-2 px-4 rounded-md bg-gray-900 text-gray-300 w-full outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+        <div
+      id="contactMe"
+      data-aos="fade-up"
+      data-aos-delay="400"
+      className="rounded-2xl w-full mt-16 bg-blue-950 py-12 px-4 md:px-8"
+    >
+      <h2 className="text-white text-center font-light text-4xl md:text-5xl lg:text-6xl mb-10">
+        Contact Me
+      </h2>
+
+      <form ref={form} onSubmit={sendEmail} className="flex flex-col items-center">
+        <div className="md:w-3/4 lg:w-2/3 xl:w-1/2 space-y-4">
+          {/* Name & Email */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative w-full">
+              <FaUser className="absolute top-3 left-3 text-gray-400" />
+              <input
+                name="name"
+                type="text"
+                placeholder="Nom"
+                required
+                className="pl-10 py-3 px-4 rounded-md bg-gray-900 text-gray-200 w-full outline-none focus:ring-2 focus:ring-blue-600"
+              />
             </div>
-            <button type="submit" className="border-2 text-md mt-5 rounded-md py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600">
-              Send Message
-            </button>
-          </form>
+            <div className="relative w-full">
+              <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                required
+                className="pl-10 py-3 px-4 rounded-md bg-gray-900 text-gray-200 w-full outline-none focus:ring-2 focus:ring-blue-600"
+              />
+            </div>
+          </div>
+
+          {/* Subject */}
+          <div className="relative">
+            <FaTag className="absolute top-3 left-3 text-gray-400" />
+            <input
+              name="subject"
+              type="text"
+              placeholder="Objet"
+              className="pl-10 py-3 px-4 rounded-md bg-gray-900 text-gray-200 w-full outline-none focus:ring-2 focus:ring-blue-600"
+            />
+          </div>
+
+          {/* Message */}
+          <div className="relative">
+            <FaCommentDots className="absolute top-3 left-3 text-gray-400" />
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Message"
+              required
+              className="pl-10 py-3 px-4 rounded-md bg-gray-900 text-gray-200 w-full outline-none focus:ring-2 focus:ring-blue-600 resize-none"
+            ></textarea>
+          </div>
         </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
       </div>
     </section>
   );

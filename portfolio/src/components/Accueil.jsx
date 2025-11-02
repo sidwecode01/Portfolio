@@ -7,6 +7,9 @@ import { useEffect } from 'react';
 import Experience from './Experience';
 import Projects from "./Project";
 import Contact from './Contact';
+import Footer from './Footer';
+
+
 
 
 
@@ -24,6 +27,7 @@ export default function Accueil() {
          <Experience />
          <Projects />
          <Contact />
+         <Footer />
         
 
       </main>
