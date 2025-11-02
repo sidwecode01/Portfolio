@@ -5,7 +5,7 @@ const NavbarLinks = [
   { id: 1, name: "Home", link: "#home" },
   { id: 2, name: "Compétences", link: "#skills" },
   { id: 3, name: "Experience", link: "#experience" },
-  { id: 4, name: "My projects", link: "#projects" },
+  { id: 4, name: "Mes projets", link: "#projects" },
   { id: 5, name: "Contact", link: "#contact" },
 ];
 
