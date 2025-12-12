@@ -1,5 +1,5 @@
 import Navbar from "./Navbar"
-import me from '../assets/meUpdate.png'
+import me from '../assets/sidyellow.jpg'
 import Typewriter from "typewriter-effect";
 
 export default function HearderDesign() {
