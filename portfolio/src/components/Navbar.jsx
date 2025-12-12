@@ -20,7 +20,7 @@ export default function Navbar() {
           <a className="text-white font-bold text-3xl"><img
   src={logo}
   alt="Sid-Of-God"
-  className="w-20 h-auto mx-auto my-4 rounded-lg shadow-lg transition-transform hover:scale-105"
+  className="w-15 h-15 mx-auto my-4 rounded-lg shadow-lg transition-transform hover:scale-105"
 />
 </a>
 
