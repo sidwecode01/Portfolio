@@ -2,6 +2,7 @@ import image1 from "../assets/image.png"
 import ecommerce1 from "../assets/ecommerceFront.png"
 import { Link } from "react-router-dom"
 import trelloMobile from "../assets/trelloMobile.png"
+import yowl from "../assets/yowl.png"
 import rotten from "../assets/rotten.jpeg"
 
 
@@ -41,7 +42,7 @@ export default function Projects() {
         { title: "DashBoard", image: image1 },
         { title: "Trello Clone Web", image: image1 },
         { title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobile },
-        { title: "Yowl – Plateforme sociale de commentaires universels", image: image1 },
+        { title: "Yowl – Plateforme sociale de commentaires universels", image: yowl },
         { title: "My rotten tomato", image: rotten },
         { title: "Post It – Application de planification et de notes universelles", image: image1 },
         { title: "My SHOP – Plateforme e-commerce moderne", image: image1 },
