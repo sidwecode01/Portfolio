@@ -5,7 +5,6 @@ import trelloMobile from "../assets/trelloMobile.png"
 import yowl from "../assets/yowl.png"
 import rotten from "../assets/rotten.jpeg"
 import freeAds from "../assets/freeAds.png"
-import WorknoteiaVideo from "../assets/worknoteIA.mp4"
 import WorknoteiaImage from "../assets/worknoteIA.jpeg"
 import yobalo from "../assets/yobalo1.png"
 
@@ -49,7 +48,7 @@ export default function Projects() {
         { title: "My rotten tomato", image: rotten },
         { title: "E-Commerce Web Site (View) – Interface utilisateur d’une boutique en ligne", image: ecommerce1 },
 
-        { title: "WorknoteIA – Application mobile de prise de notes avec rapport automatique", image: WorknoteiaImage, video: WorknoteiaVideo, description: "WorknoteIA est une application mobile développée en React Native avec un backend Nest.js. Elle facilite la prise de notes des étudiants en stage et génère automatiquement des rapports hebdomadaires, mensuels et finaux grâce à l’IA, afin qu’ils soient prêts pour leurs présentations.", technologies: ["React Native", "Nest.js", "JavaScript", "AI"] },
+        { title: "WorknoteIA – Application mobile de prise de notes avec rapport automatique", image: WorknoteiaImage, description: "WorknoteIA est une application mobile développée en React Native avec un backend Nest.js. Elle facilite la prise de notes des étudiants en stage et génère automatiquement des rapports hebdomadaires, mensuels et finaux grâce à l’IA, afin qu’ils soient prêts pour leurs présentations.", technologies: ["React Native", "Nest.js", "JavaScript", "AI"] },
         { title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobile },
         { title: "Free Ads – Site e-commerce développé en Laravel", image: freeAds },
         { title: "Yowl – Plateforme sociale de commentaires universels", image: yowl },
@@ -60,7 +59,7 @@ export default function Projects() {
 
 
 
-        
+
         // { title: "Calculatrice scientifique – Logique NPI (Python)", image: image1 },
         // { title: "Calculatrice (Javascript)", image: image1 },
         // { title: "TICKET WIFI – Interface utilisateur pour l’achat de tickets Wi-Fi", image: image1 },
