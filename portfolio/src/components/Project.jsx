@@ -4,6 +4,10 @@ import { Link } from "react-router-dom"
 import trelloMobile from "../assets/trelloMobile.png"
 import yowl from "../assets/yowl.png"
 import rotten from "../assets/rotten.jpeg"
+import freeAds from "../assets/freeAds.png"
+import WorknoteiaVideo from "../assets/worknoteIA.mp4"
+import WorknoteiaImage from "../assets/worknoteIA.jpeg"
+import yobalo from "../assets/yobalo1.png"
 
 
 const ProjectCard = ({ image, title }) => (
@@ -38,20 +42,24 @@ const ProjectCard = ({ image, title }) => (
 
 export default function Projects() {
     const projects = [
-        { title: "Portfolio", image: image1, },
-        { title: "DashBoard", image: image1 },
-        { title: "Trello Clone Web", image: image1 },
-        { title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobile },
-        { title: "Yowl – Plateforme sociale de commentaires universels", image: yowl },
+        // { title: "Portfolio", image: image1, },
+        // { title: "DashBoard", image: image1 },
+        // { title: "Trello Clone Web", image: image1 },
+        { title: "Yobalo – Plateforme de livraison de proximité", image: yobalo, description: "Yobalo est une plateforme de livraison de proximité composée d’un site vitrine (https://yobalo.com/) et de trois applications : client, livreur et dashboard admin. Elle permet de passer commande rapidement, suivre les livreurs en temps réel et gérer l’activité depuis l’administration.", technologies: ["React", "React Native", "Node.js", "API"] },
         { title: "My rotten tomato", image: rotten },
-        { title: "Post It – Application de planification et de notes universelles", image: image1 },
-        { title: "My SHOP – Plateforme e-commerce moderne", image: image1 },
-        { title: "SHOW TIME", image: image1 },
         { title: "E-Commerce Web Site (View) – Interface utilisateur d’une boutique en ligne", image: ecommerce1 },
-        { title: "Calculatrice scientifique – Logique NPI (Python)", image: image1 },
-        { title: "Calculatrice (Javascript)", image: image1 },
-        { title: "TICKET WIFI – Interface utilisateur pour l’achat de tickets Wi-Fi", image: image1 },
-        { title: "E-COMMERCE CLONE – Interface utilisateur d’un site e-commerce", image: image1 },
+
+        { title: "WorknoteIA – Application mobile de prise de notes avec rapport automatique", image: WorknoteiaImage, video: WorknoteiaVideo, description: "WorknoteIA est une application mobile développée en React Native avec un backend Nest.js. Elle facilite la prise de notes des étudiants en stage et génère automatiquement des rapports hebdomadaires, mensuels et finaux grâce à l’IA, afin qu’ils soient prêts pour leurs présentations.", technologies: ["React Native", "Nest.js", "JavaScript", "AI"] },
+        { title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobile },
+        { title: "Free Ads – Site e-commerce développé en Laravel", image: freeAds },
+        { title: "Yowl – Plateforme sociale de commentaires universels", image: yowl },
+        // { title: "Post It – Application de planification et de notes universelles", image: image1 },
+        // { title: "My SHOP – Plateforme e-commerce moderne", image: image1 },
+        // { title: "SHOW TIME", image: image1 },
+        // { title: "Calculatrice scientifique – Logique NPI (Python)", image: image1 },
+        // { title: "Calculatrice (Javascript)", image: image1 },
+        // { title: "TICKET WIFI – Interface utilisateur pour l’achat de tickets Wi-Fi", image: image1 },
+        // { title: "E-COMMERCE CLONE – Interface utilisateur d’un site e-commerce", image: image1 },
 
     ]
     return (

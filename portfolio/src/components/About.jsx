@@ -6,9 +6,14 @@ import { FaReact, FaCss3Alt, FaJs, FaGitAlt, FaVuejs, FaHtml5 } from 'react-icon
 import { SiLaravel, SiNestjs, SiNextdotjs, SiTailwindcss, SiPostman, SiFlask } from "react-icons/si";
 
 import ecommerce1 from "../assets/ecommerceFront.png"
-import trelloMobile from "../assets/trelloMobile.png"
+import trelloMobileImage from "../assets/trelloMobile.png"
+import trelloMobileVideo from "../assets/trelloMobile.mp4"
 import rotten from "../assets/rotten.jpeg"
 import yowl from "../assets/yowl.png"
+import freeAds from "../assets/freeAds.png"
+import WorknoteiaImage from "../assets/WorknoteIA.jpeg"
+import WorknoteiaVideo from "../assets/worknoteIA.mp4"
+import yobalo from "../assets/yobalo.png"
 
 const techIcons = {
   "React": <FaReact className="text-blue-400 w-6 h-6 hover:scale-110 transition-transform duration-200 animate-spin" />,
@@ -39,7 +44,10 @@ const projects = [
   { title: "Calculatrice standard – JavaScript", image: image1, description: "Ce projet est une calculatrice simple et intuitive développée en JavaScript, conçue pour effectuer les opérations arithmétiques de base. Elle simule le fonctionnement d’une calculatrice physique avec une interface utilisateur responsive et interactive, permettant aux utilisateurs d’effectuer des calculs directement depuis leur navigateur." },
   { title: "TICKET WIFI – Interface utilisateur pour l’achat de tickets Wi-Fi", image: image1 , description: "TICKEY WIFI est une reproduction front-end d’un site de vente de codes d’accès Wi-Fi. Ce projet simule l’expérience d’un utilisateur souhaitant acheter un ticket de connexion à Internet, avec une interface fluide, moderne et responsive. Il met en avant les étapes clés du parcours client : sélection du forfait, affichage des tarifs, saisie des informations, et confirmation de commande.", technologies: ["Vue.js", "Laravel", "JavaScript"]},
   { title: "E-COMMERCE CLONE – Interface utilisateur d’un site e-commerce", image: image1, description: "Ce projet est une reproduction front-end d’un site e-commerce moderne, conçu pour simuler l’expérience d’achat en ligne. L’objectif était de recréer fidèlement l’interface d’un site marchand existant, en mettant l’accent sur le design, la navigation, et l’interaction utilisateur, sans intégrer de logique back-end.", technologies: ["Vue.js", "Laravel", "JavaScript"] },
-  { title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobile, description: "Trello Clone Mobile est une application mobile inspirée de Trello, conçue pour permettre aux utilisateurs de gérer leurs projets et tâches de manière intuitive, directement depuis leur smartphone. Elle reprend les principes de l’organisation par tableaux, listes et cartes, tout en offrant une interface adaptée aux usages mobiles.", technologies: ["Vue.js", "Laravel", "JavaScript"] },
+  { title: "Trello Clone Mobile – Application de gestion de tâches", image: trelloMobileImage, video: trelloMobileVideo, description: "Trello Clone Mobile est une application mobile inspirée de Trello, conçue pour permettre aux utilisateurs de gérer leurs projets et tâches de manière intuitive, directement depuis leur smartphone. Elle reprend les principes de l’organisation par tableaux, listes et cartes, tout en offrant une interface adaptée aux usages mobiles.", technologies: ["Vue.js", "Laravel", "JavaScript"] },
+  { title: "WorknoteIA – Application mobile de prise de notes avec rapport automatique", image: WorknoteiaImage, video: WorknoteiaVideo, description: "WorknoteIA est une application mobile développée en React Native avec un backend Nest.js. Elle facilite la prise de notes des étudiants en stage et génère automatiquement des rapports hebdomadaires, mensuels et finaux grâce à l’IA, afin qu’ils soient prêts pour leurs présentations.", technologies: ["React Native", "Nest.js", "JavaScript", "AI"] },
+  { title: "Yobalo – Plateforme de livraison de proximité", image: yobalo, description: "Yobalo est une plateforme de livraison de proximité composée d’un site vitrine (https://yobalo.com/) et de trois applications : client, livreur et dashboard admin. Elle permet de passer commande rapidement, suivre les livreurs en temps réel et gérer l’activité depuis l’administration.", technologies: ["React", "React Native", "Node.js", "API" ] },
+  { title: "Free Ads – Site e-commerce développé en Laravel", image: freeAds, description: "Free Ads est un site e-commerce complet développé avec Laravel, offrant une plateforme moderne pour la vente en ligne. Il inclut la gestion des produits, des utilisateurs, des commandes et des paiements, avec une interface utilisateur intuitive et responsive.", technologies: ["Laravel", "JavaScript", "HTML", "CSS"] },
   
 
 ]
@@ -57,7 +65,18 @@ export default function About() {
     <div className="bg-white dark:bg-gray-900 min-h-screen flex items-center justify-center p-6">
       <div className="bg-gray-50 dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden max-w-4xl w-full grid md:grid-cols-2">
         <div className="h-64 md:h-auto">
-          <img src={project.image} className="w-full h-full object-cover" />
+          {project.video ? (
+            <video
+              src={project.video}
+              poster={project.image}
+              className="w-full h-full object-cover"
+              controls
+            />
+          ) : project.image.endsWith('.mp4') || project.image.endsWith('.webm') || project.image.endsWith('.ogg') ? (
+            <video src={project.image} className="w-full h-full object-cover" controls />
+          ) : (
+            <img src={project.image} className="w-full h-full object-cover" />
+          )}
         </div>
 
         <div className="p-6 flex flex-col justify-between">
