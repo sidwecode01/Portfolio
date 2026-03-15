@@ -56,6 +56,11 @@ export default function Projects() {
         // { title: "Post It – Application de planification et de notes universelles", image: image1 },
         // { title: "My SHOP – Plateforme e-commerce moderne", image: image1 },
         // { title: "SHOW TIME", image: image1 },
+
+
+
+
+        
         // { title: "Calculatrice scientifique – Logique NPI (Python)", image: image1 },
         // { title: "Calculatrice (Javascript)", image: image1 },
         // { title: "TICKET WIFI – Interface utilisateur pour l’achat de tickets Wi-Fi", image: image1 },
