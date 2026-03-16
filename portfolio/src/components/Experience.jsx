@@ -7,7 +7,7 @@ export default function Experience() {
         { title: "Licence 1", period: "2023-2024", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
         { title: "Formation WECODE (6 mois)", period: "Delivree par Epitech", place: "WECODE", Icon: FaGraduationCap },
         { title: "BAC obtenu", period: "2023", place: "Lycee Moderne 2 de Bondoukou", Icon: FaGraduationCap },
-        { title: "BEPC obtenu", period: "2020", place: "Ecole MAMPO - Bondoukou", Icon: FaSchool },
+        { title: "BEPEC obtenu", period: "2020", place: "Ecole MAMPO - Bondoukou", Icon: FaSchool },
     ];
 
     return (

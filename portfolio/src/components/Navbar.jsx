@@ -64,8 +64,13 @@ export default function Navbar() {
         {/* Menu desktop */}
         <nav className="hidden md:flex md:ml-auto md:mr-auto font-medium flex-wrap items-center text-base text-gray-300 justify-center">
           {NavbarLinks.map((navBar) => (
-            <a key={navBar.id} href={navBar.link} className="hover:text-white mr-7">
+            <a
+              key={navBar.id}
+              href={navBar.link}
+              className="group relative mr-7 text-gray-300 transition-colors duration-300 hover:text-white"
+            >
               {navBar.name}
+              <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-blue-300 via-white to-blue-300 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
             </a>
           ))}
         </nav>

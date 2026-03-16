@@ -42,38 +42,38 @@ export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState("Front-end");
 
   return (
-    <main id="skills" className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <main id="skills" className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Left section */}
         <div className="flex flex-col justify-between">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-blue-950">FULLSTACK DEVELOPER</h1>
-            <p className="text-lg text-gray-600 mt-2">Compétences</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-blue-950">FULLSTACK DEVELOPER</h1>
+            <p className="text-lg text-gray-600 mt-2">Competences</p>
           </div>
 
           <div data-aos="fade-left" className="grid grid-cols-2 gap-4">
-            <img src={imageReact} alt="React" className="rounded-lg shadow-md h-32 object-cover" />
-            <img src={imageNest} alt="NestJS" className="rounded-lg shadow-md h-32 object-cover" />
-            <img src={imageLaravel} alt="Laravel" className="rounded-lg shadow-md h-32 object-cover" />
-            <img src={imageVue} alt="Vue.js" className="rounded-lg shadow-md h-32 object-cover" />
+            <img src={imageReact} alt="React" loading="lazy" decoding="async" className="rounded-lg shadow-md h-32 object-cover" />
+            <img src={imageNest} alt="NestJS" loading="lazy" decoding="async" className="rounded-lg shadow-md h-32 object-cover" />
+            <img src={imageLaravel} alt="Laravel" loading="lazy" decoding="async" className="rounded-lg shadow-md h-32 object-cover" />
+            <img src={imageVue} alt="Vue.js" loading="lazy" decoding="async" className="rounded-lg shadow-md h-32 object-cover" />
           </div>
 
           <div data-aos="fade-up" className="mt-6">
             <a href={CV_Resume} download>
               <button className="bg-blue-950 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition font-semibold text-sm">
-                Télécharger le CV
+                Telecharger le CV
               </button>
             </a>
           </div>
         </div>
 
         {/* Right section */}
-        <div data-aos="fade-right"  className="bg-white p-6 rounded-lg shadow-md">
-          <label className="block mb-2 font-semibold text-gray-700">Catégorie :</label>
+        <div data-aos="fade-right" className="bg-white p-6 rounded-2xl shadow-[0_20px_60px_-40px_rgba(15,23,42,0.5)] border border-gray-100">
+          <label className="block mb-3 font-semibold text-gray-700">Categorie</label>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mb-6"
+            className="w-full p-3 border border-gray-300 rounded-xl mb-6 md:hidden"
           >
             {Object.keys(skillsData).map((category) => (
               <option key={category} value={category}>
@@ -82,13 +82,33 @@ export default function Skills() {
             ))}
           </select>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="hidden md:flex flex-wrap gap-2 mb-6">
+            {Object.keys(skillsData).map((category) => {
+              const isActive = category === selectedCategory;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+                    isActive
+                      ? "bg-blue-950 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {skillsData[selectedCategory].map((skill) => (
-              <div key={skill} className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center shadow">
+              <div key={skill} className="group flex flex-col items-center text-center">
+                <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center shadow-sm transition-transform group-hover:-translate-y-1">
                   {iconMap[skill] || <span className="text-sm font-medium">{skill[0]}</span>}
                 </div>
-                <span className="mt-2 text-xs font-medium text-gray-700">{skill}</span>
+                <span className="mt-2 text-sm font-medium text-gray-700">{skill}</span>
               </div>
             ))}
           </div>

@@ -19,12 +19,12 @@ export default function HearderDesign() {
             </svg>
             <div className="relative z-10">
                 <Navbar />
-                <section className="flex flex-col md:flex-row items-center justify-center w-full px-4 md:px-52 pt-24 pb-8 md:pt-32 md:pb-24 md:mt-0">
+                <section className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-10 md:pt-32 md:pb-24 gap-10">
                     <div data-aos="fade-up" className="flex-1 md:text-left mt-10 md:mt-0">
 
 
         {/* Effet d'écriture progressive */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white md-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight md-4">
             <Typewriter
                 options={{
                     strings: ["Nango Koffi Sidoine"],
@@ -39,12 +39,12 @@ export default function HearderDesign() {
         </h1>
 
         <p data-aos="fade-up" data-aos-delay="300"
-            className="text-base sm:text-lg text-gray-300 mb-6">
+            className="text-base sm:text-lg text-gray-300 mb-6 max-w-xl">
           Développeur Fullstack, je conçois des applications modernes qui résolvent de vrais problèmes. Formé par Wecode et en Licence 3 à l’UVCI, je transforme des idées ambitieuses en expériences digitales concrètes.
         </p>
 
         <a href="#contactMe">
-            <button className="text-gray-950 hidden md:block mt-4 bg-white hover:bg-blue-300 font-semibold rounded-full text-sm px-5 py-2.5 text-center">
+            <button className="text-gray-950 hidden md:block mt-4 bg-white hover:bg-blue-300 font-semibold rounded-full text-sm px-6 py-2.5 text-center">
                 Contact
             </button>
         </a>
@@ -52,8 +52,9 @@ export default function HearderDesign() {
 
         <div data-aos="fade-up"
             className="flex-1 flex justify-center md:justify-end mt-0 md:mt-0">
-            <img src={me} alt="Nothing found to you"
-                className="h-[300px] sm:h-[450px] w-[250px] sm:w-[360px] object-cover rounded-lg" />
+            <img src={me} alt="Portrait"
+                loading="eager"
+                className="h-[300px] sm:h-[450px] w-[250px] sm:w-[360px] object-cover rounded-2xl shadow-lg" />
         </div>
 
                 </section>
