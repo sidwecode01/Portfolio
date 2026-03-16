@@ -11,7 +11,7 @@ import trelloMobileImage from "../assets/trelloMobile.png"
 import rotten from "../assets/rotten.jpeg"
 import yowl from "../assets/yowl.png"
 import freeAds from "../assets/freeAds.png"
-import WorknoteiaImage from "../assets/WorknoteIA.jpeg"
+import WorknoteiaImage from "../assets/worknoteia.jpeg"
 import yobalo from "../assets/yobalo.png"
 
 const techIcons = {
