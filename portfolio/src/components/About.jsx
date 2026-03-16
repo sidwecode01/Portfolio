@@ -84,7 +84,7 @@ export default function About() {
 
             <div className="mb-4">
               <h3 className="text-xl font-semibold text-teal-600 dark:text-teal-400 mb-2">Description</h3>
-              <p className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-200 text-sm">
+              <p className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-200 text-base md:text-lg">
                 {project.description}
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function About() {
               {project.technologies.map((tech, index) => (
                 <div key={index} className="flex items-center space-x-2">
                   {techIcons[tech]}
-                  <span className="text-gray-700 dark:text-gray-200 text-sm">{tech}</span>
+                  <span className="text-gray-700 dark:text-gray-200 text-base md:text-lg">{tech}</span>
                 </div>
               ))}
             </div>
