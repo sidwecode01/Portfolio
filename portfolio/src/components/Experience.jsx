@@ -2,10 +2,10 @@ import { FaGraduationCap, FaSchool, FaUniversity, FaBriefcase } from "react-icon
 
 export default function Experience() {
     const formations = [
-        { title: "Licence 3", period: "2025-2026", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
-        { title: "Licence 2", period: "2024-2025", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
-        { title: "Licence 1", period: "2023-2024", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
-        { title: "Formation WECODE (6 mois)", period: "Delivree par Epitech", place: "WECODE", Icon: FaGraduationCap },
+        { title: "Licence 3 (1 an)", period: "2025-2026", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
+        { title: "Licence 2 (1 an)", period: "2024-2025", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
+        { title: "Licence 1 (1 an)", period: "2023-2024", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
+        { title: "Formation WECODE (6 mois) Delivree par Epitech", period: "2025-2026 ", place: "WECODE", Icon: FaGraduationCap },
         { title: "BAC obtenu", period: "2023", place: "Lycee Moderne 2 de Bondoukou", Icon: FaGraduationCap },
         { title: "BEPC obtenu", period: "2020", place: "Ecole MAMPO - Bondoukou", Icon: FaSchool },
     ];
