@@ -1,9 +1,26 @@
 import Navbar from "./Navbar"
-import me from '../assets/sidyellow.jpg'
+import me from '../assets/sidyellow2.png'
 import Typewriter from "typewriter-effect";
 
 export default function HearderDesign() {
-    return (<div className='relative overflow-hidden min-h-[550px] sm:min-h-[650px] flex flex-col items-center '> <div className="md:h-[611px] h-[990px] md:w-[1600px] w-[950px]  bg-gradient-to-r  absolute bg-blue-950 rounded-full transform rotate-6 -top-40 md:-top-10 z-0"> </div> <Navbar /> <section className="flex flex-col md:flex-row items-center justify-center w-full px-4 md:px-52 pt-24 pb-4 md:pd-24 md:pt-32 md:pb-24  md:mt-0 z-10"> <div data-aos="fade-up" className="flex-1 md:text-left mt-10 md:mt-0">
+    return (
+    <div className='relative min-h-[550px] sm:min-h-[650px] flex flex-col items-center overflow-hidden'>
+        <div className="relative w-full">
+            <svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 1440 700"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+            >
+                <path
+                    d="M0,0 H1440 V560 Q1080,700 760,620 Q520,560 0,560 Z"
+                    fill="#1e2a5a"
+                />
+            </svg>
+            <div className="relative z-10">
+                <Navbar />
+                <section className="flex flex-col md:flex-row items-center justify-center w-full px-4 md:px-52 pt-24 pb-8 md:pt-32 md:pb-24 md:mt-0">
+                    <div data-aos="fade-up" className="flex-1 md:text-left mt-10 md:mt-0">
 
 
         {/* Effet d'écriture progressive */}
@@ -23,9 +40,7 @@ export default function HearderDesign() {
 
         <p data-aos="fade-up" data-aos-delay="300"
             className="text-base sm:text-lg text-gray-300 mb-6">
-            Développeur Fullstack passionné par la création
-            d’applications utiles et modernes. Formé par Wecode
-            et actuellement en Licence 3 à l’UVCI.
+          Développeur Fullstack, je conçois des applications modernes qui résolvent de vrais problèmes. Formé par Wecode et en Licence 3 à l’UVCI, je transforme des idées ambitieuses en expériences digitales concrètes.
         </p>
 
         <a href="#contactMe">
@@ -41,8 +56,9 @@ export default function HearderDesign() {
                 className="h-[300px] sm:h-[450px] w-[250px] sm:w-[360px] object-cover rounded-lg" />
         </div>
 
-    </section>
-
+                </section>
+            </div>
+        </div>
     </div>
     )
 

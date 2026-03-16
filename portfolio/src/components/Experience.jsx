@@ -4,6 +4,39 @@ export default function Experience() {
     return (
         <section id="experience" className="text-gray-600">
             <div className="container px-5 py-10 m-auto">
+                <div className="flex flex-col text-center w-full mb-12">
+                    <h1 data-aos="fade-up" data-aos-delay="200" className="sm:text-3xl text-3xl font-bold">Formation</h1>
+                    <p data-aos="fade-up" data-aos-delay="300" className="lg:w-2/3 mx-auto leading-relaxed text-base">
+                        Mon parcours academique et professionnel recent.
+                    </p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400" className="flex flex-wrap -m-4 mb-16">
+                    <div className="p-4 md:w-1/2 w-full">
+                        <div className="border-2 border-blue-200 px-6 py-5 rounded-lg h-full">
+                            <h2 className="font-semibold text-lg text-gray-900">BEPEC (2020)</h2>
+                            <p className="leading-relaxed">Bondoukou - Ecole MAMPO</p>
+                        </div>
+                    </div>
+                    <div className="p-4 md:w-1/2 w-full">
+                        <div className="border-2 border-blue-200 px-6 py-5 rounded-lg h-full">
+                            <h2 className="font-semibold text-lg text-gray-900">BAC (2023)</h2>
+                            <p className="leading-relaxed">Bondoukou - Lycee Moderne 2 de Bondoukou</p>
+                        </div>
+                    </div>
+                    <div className="p-4 md:w-1/2 w-full">
+                        <div className="border-2 border-blue-200 px-6 py-5 rounded-lg h-full">
+                            <h2 className="font-semibold text-lg text-gray-900">Licence 3 (en cours)</h2>
+                            <p className="leading-relaxed">Universite Virtuelle de Cote d'Ivoire</p>
+                        </div>
+                    </div>
+                    <div className="p-4 md:w-1/2 w-full">
+                        <div className="border-2 border-blue-200 px-6 py-5 rounded-lg h-full">
+                            <h2 className="font-semibold text-lg text-gray-900">Stage (actuel)</h2>
+                            <p className="leading-relaxed">MTP Business</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="flex flex-col text-center w-full mb-20">
                     <h1 data-aos="fade-up" data-aos-delay="300" className="sm:text-3xl text-3xl font-bold">Experience</h1>
                     <p data-aos="fade-up" data-aos-delay="400" className="lg:w-2/3 mx-auto leading-relaxed text-base">
