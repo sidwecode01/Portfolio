@@ -5,7 +5,7 @@ import trelloMobile from "../assets/trelloMobile.png"
 import yowl from "../assets/yowl.png"
 import rotten from "../assets/rotten.jpeg"
 import freeAds from "../assets/freeAds.png"
-import WorknoteiaImage from "../assets/worknoteIA.jpeg"
+import WorknoteiaImage from "../assets/worknoteia.jpeg"
 import yobalo from "../assets/yobalo1.png"
 
 
