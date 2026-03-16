@@ -42,6 +42,7 @@ export default function HearderDesign() {
         </div>
 
     </section>
+    <h1>je t'aime fort</h1>
     </div>
     )
 

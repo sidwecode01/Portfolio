@@ -8,7 +8,6 @@ import freeAds from "../assets/freeAds.png"
 import WorknoteiaImage from "../assets/worknoteia.jpeg"
 import yobalo from "../assets/yobalo1.png"
 
-
 const ProjectCard = ({ image, title }) => (
 
     <div className="p-4 md:w-1/3 mb-6">
