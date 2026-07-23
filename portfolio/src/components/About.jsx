@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaReact, FaCss3Alt, FaJs, FaGitAlt, FaVuejs, FaHtml5 } from "react-icons/fa";
 import { SiLaravel, SiNestjs, SiNextdotjs, SiTailwindcss, SiPostman, SiFlask } from "react-icons/si";
-import { slugify } from "../utils/slugify";
-import { projects } from "../data/projects";
+import { getProjectBySlug } from "../lib/projectsRepo";
+import MediaGallery from "./MediaGallery";
 
 const techIcons = {
   React: <FaReact className="text-blue-400 w-6 h-6" />,
@@ -35,14 +36,40 @@ const Badge = ({ children }) => (
 
 export default function About() {
   const { title } = useParams();
-  const project = projects.find((p) => slugify(p.title) === title);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    getProjectBySlug(title)
+      .then((p) => active && setProject(p))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, [title]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-100 text-slate-500">
+        Chargement du projet...
+      </div>
+    );
+  }
 
   if (!project) {
     return <div className="p-6">Pas de projet correspondant a ce titre</div>;
   }
 
   const techs = project.technologies || [];
-  const gallery = project.gallery && project.gallery.length > 0 ? project.gallery : [project.image];
+  // Galerie : medias enregistres, sinon l'image de couverture par defaut.
+  const media =
+    project.media && project.media.length > 0
+      ? project.media
+      : project.image
+      ? [{ type: "image", url: project.image }]
+      : [];
   const features = project.features || [
     "Interface claire et responsive",
     "Parcours utilisateur fluide",
@@ -204,19 +231,7 @@ export default function About() {
         </Section>
 
         <Section title="Screenshots / Gallery">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {gallery.map((img, index) => (
-              <div key={index} className="rounded-2xl overflow-hidden border border-gray-100">
-                <img
-                  src={img}
-                  alt={`${project.title} ${index + 1}`}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-56 object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          <MediaGallery media={media} title={project.title} />
         </Section>
 
         <Section title="Results / Impact">

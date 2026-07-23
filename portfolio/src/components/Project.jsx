@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { slugify } from "../utils/slugify";
-import { projects } from "../data/projects";
+import { useProjects } from "../hooks/useProjects";
 
-const ProjectCard = ({ image, title }) => (
+const ProjectCard = ({ image, title, slug }) => (
   <div className="group">
-    <Link to={`/projet/${slugify(title)}`} aria-label={`Voir le projet ${title}`}>
+    <Link to={`/projet/${slug}`} aria-label={`Voir le projet ${title}`}>
       <div className="relative bg-gray-900/80 rounded-2xl overflow-hidden shadow-[0_18px_60px_-40px_rgba(15,23,42,0.7)] transition-transform duration-300 group-hover:-translate-y-1">
         <div className="aspect-[4/3] overflow-hidden">
           <img
@@ -38,19 +37,11 @@ const ProjectCard = ({ image, title }) => (
 );
 
 export default function Projects() {
-  const featuredTitles = [
-    "Yobalo - Plateforme de livraison de proximite",
-    "My rotten tomato",
-    "E-Commerce Web Site (View) - Interface utilisateur d'une boutique en ligne",
-    "WorknoteIA - Application mobile de prise de notes avec rapport automatique",
-    "Trello Clone Mobile - Application de gestion de taches",
-    "Free Ads - Site e-commerce developpe en Laravel",
-    "Yowl - Plateforme sociale de commentaires universels",
-  ];
+  const { projects, loading } = useProjects();
 
-  const featuredProjects = featuredTitles
-    .map((title) => projects.find((p) => p.title === title))
-    .filter(Boolean);
+  // Priorite aux projets marques "featured" ; sinon les 6 premiers.
+  const flagged = projects.filter((p) => p.featured);
+  const featuredProjects = (flagged.length > 0 ? flagged : projects).slice(0, 6);
 
   return (
     <section id="projects" className="text-gray-200 bg-blue-950">
@@ -64,11 +55,19 @@ export default function Projects() {
           </div>
         </div>
 
-        <div data-aos="fade-up" data-aos-delay="400" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="aspect-[4/3] rounded-2xl bg-gray-800/60 animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div data-aos="fade-up" data-aos-delay="400" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.id} {...project} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
