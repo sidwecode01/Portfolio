@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
 import { useProjects } from "../hooks/useProjects";
+import { withPlaceholder, onImageError } from "../utils/media";
 
 const ProjectCard = ({ image, title, slug }) => (
   <div className="group">
@@ -7,7 +10,8 @@ const ProjectCard = ({ image, title, slug }) => (
       <div className="relative bg-gray-900/80 rounded-2xl overflow-hidden shadow-[0_18px_60px_-40px_rgba(15,23,42,0.7)] transition-transform duration-300 group-hover:-translate-y-1">
         <div className="aspect-[4/3] overflow-hidden">
           <img
-            src={image}
+            src={withPlaceholder(image)}
+            onError={onImageError}
             alt={title}
             loading="lazy"
             decoding="async"
@@ -42,6 +46,14 @@ export default function Projects() {
   // Priorite aux projets marques "featured" ; sinon les 6 premiers.
   const flagged = projects.filter((p) => p.featured);
   const featuredProjects = (flagged.length > 0 ? flagged : projects).slice(0, 6);
+
+  // Les projets se chargent en asynchrone : on recalcule AOS une fois montes
+  // pour eviter que la grille reste invisible (opacity 0).
+  useEffect(() => {
+    // refreshHard re-scanne le DOM pour enregistrer les elements ajoutes
+    // apres l'init d'AOS (grille de projets chargee en asynchrone).
+    if (!loading) AOS.refreshHard();
+  }, [loading]);
 
   return (
     <section id="projects" className="text-gray-200 bg-blue-950">

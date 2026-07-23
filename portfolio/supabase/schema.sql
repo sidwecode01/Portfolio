@@ -58,16 +58,23 @@ create trigger projects_set_updated_at
 --  2. Table des visites (metriques)
 -- ============================================================
 create table if not exists public.page_views (
-  id          bigint generated always as identity primary key,
-  path        text not null,
-  referrer    text,
-  session_id  text,                          -- identifiant anonyme de session (localStorage)
-  user_agent  text,
-  created_at  timestamptz not null default now()
+  id            bigint generated always as identity primary key,
+  path          text not null,
+  referrer      text,
+  session_id    text,                        -- identifiant anonyme de session (localStorage)
+  user_agent    text,
+  country       text,                        -- pays du visiteur (ex: "France")
+  country_code  text,                        -- code ISO 2 lettres (ex: "FR")
+  created_at    timestamptz not null default now()
 );
+
+-- Pour les bases deja creees avant l'ajout des colonnes pays :
+alter table public.page_views add column if not exists country      text;
+alter table public.page_views add column if not exists country_code text;
 
 create index if not exists page_views_created_idx on public.page_views (created_at);
 create index if not exists page_views_path_idx    on public.page_views (path);
+create index if not exists page_views_country_idx on public.page_views (country_code);
 
 -- ============================================================
 --  3. Liste blanche des administrateurs
@@ -130,14 +137,14 @@ create policy "projects_admin_delete"
   to authenticated
   using (public.is_admin());
 
--- --- page_views : n'importe qui peut enregistrer une visite (insert),
---     seul l'admin connecte peut lire les stats (select) ---
+-- --- page_views ---
+-- L'insertion se fait UNIQUEMENT via la fonction serverless Vercel /api/track,
+-- qui utilise la cle service_role (celle-ci contourne le RLS). On NE cree donc
+-- aucune policy d'insert : anon/authenticated ne peuvent pas ecrire ici.
+-- (Si tu avais deja cree la policy publique, cette ligne la supprime.)
 drop policy if exists "page_views_public_insert" on public.page_views;
-create policy "page_views_public_insert"
-  on public.page_views for insert
-  to anon, authenticated
-  with check (true);
 
+-- Seul l'admin connecte peut lire les stats.
 drop policy if exists "page_views_admin_read" on public.page_views;
 create policy "page_views_admin_read"
   on public.page_views for select

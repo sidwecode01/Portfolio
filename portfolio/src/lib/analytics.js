@@ -17,15 +17,21 @@ function getSessionId() {
   }
 }
 
-// Enregistre une visite. Silencieux en cas d'erreur (ne casse jamais le site).
+// Enregistre une visite via la fonction serverless Vercel /api/track.
+// C'est elle qui ajoute le pays (en-tete Vercel) et insere en base avec la
+// cle service_role. Silencieux en cas d'erreur (ne casse jamais le site).
+// En local (npm run dev), /api/track n'existe pas : l'appel echoue en silence.
 export async function trackPageView(path) {
-  if (!isSupabaseConfigured) return;
   try {
-    await supabase.from("page_views").insert({
-      path,
-      referrer: document.referrer || null,
-      session_id: getSessionId(),
-      user_agent: navigator.userAgent,
+    await fetch("/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        path,
+        referrer: document.referrer || null,
+        session_id: getSessionId(),
+      }),
+      keepalive: true,
     });
   } catch (err) {
     // On ne bloque pas la navigation pour une erreur d'analytics.
@@ -38,7 +44,7 @@ export async function trackPageView(path) {
 // ------------------------------------------------------------------
 export async function getMetrics(days = 30) {
   if (!isSupabaseConfigured) {
-    return { total: 0, uniqueVisitors: 0, today: 0, byDay: [], topPages: [], recent: [] };
+    return { total: 0, uniqueVisitors: 0, today: 0, byDay: [], topPages: [], topCountries: [], recent: [] };
   }
 
   const since = new Date();
@@ -47,7 +53,7 @@ export async function getMetrics(days = 30) {
 
   const { data, error } = await supabase
     .from("page_views")
-    .select("path, session_id, created_at")
+    .select("path, session_id, country, country_code, created_at")
     .gte("created_at", since.toISOString())
     .order("created_at", { ascending: false });
 
@@ -59,6 +65,8 @@ export async function getMetrics(days = 30) {
 
   const sessions = new Set();
   const pageCount = {};
+  // Provenance : par pays, on compte les visiteurs uniques (sessions distinctes).
+  const countryMap = {}; // code -> { name, code, sessions: Set }
   // Prepare un bucket par jour
   const dayMap = {};
   for (let i = 0; i < days; i++) {
@@ -74,11 +82,21 @@ export async function getMetrics(days = 30) {
     const key = new Date(r.created_at).toISOString().slice(0, 10);
     if (key in dayMap) dayMap[key] += 1;
     if (new Date(r.created_at) >= startOfToday) today += 1;
+
+    const code = r.country_code || "??";
+    if (!countryMap[code]) {
+      countryMap[code] = { code, name: r.country || "Inconnu", sessions: new Set() };
+    }
+    countryMap[code].sessions.add(r.session_id || `anon-${r.created_at}`);
   }
 
   const byDay = Object.entries(dayMap).map(([date, count]) => ({ date, count }));
   const topPages = Object.entries(pageCount)
     .map(([path, count]) => ({ path, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 8);
+  const topCountries = Object.values(countryMap)
+    .map((c) => ({ code: c.code, name: c.name, count: c.sessions.size }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 8);
   const recent = rows.slice(0, 12);
@@ -89,6 +107,7 @@ export async function getMetrics(days = 30) {
     today,
     byDay,
     topPages,
+    topCountries,
     recent,
   };
 }

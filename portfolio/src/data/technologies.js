@@ -1,0 +1,58 @@
+// Liste canonique des technologies proposees dans le selecteur du formulaire.
+// Utiliser des noms EXACTS (casse comprise) : ils servent aussi a afficher
+// les icones/logos sur la page detail (voir About.jsx techIcons).
+export const TECHNOLOGIES = [
+  // Frontend
+  "React",
+  "React Native",
+  "Vue.js",
+  "Next.js",
+  "Angular",
+  "Svelte",
+  "JavaScript",
+  "TypeScript",
+  "HTML",
+  "CSS",
+  "Tailwind CSS",
+  "Bootstrap",
+  "Sass",
+  "Redux",
+  // Backend
+  "Node.js",
+  "Express",
+  "NestJS",
+  "Laravel",
+  "PHP",
+  "Python",
+  "Django",
+  "Flask",
+  "Java",
+  "Spring Boot",
+  ".NET",
+  "Go",
+  // Mobile
+  "Flutter",
+  "Swift",
+  "Kotlin",
+  // Bases de donnees
+  "PostgreSQL",
+  "MySQL",
+  "MongoDB",
+  "Supabase",
+  "Firebase",
+  "SQLite",
+  "Redis",
+  // Outils / DevOps
+  "Git",
+  "Docker",
+  "Kubernetes",
+  "AWS",
+  "Vercel",
+  "Netlify",
+  "GraphQL",
+  "REST API",
+  "API",
+  "Postman",
+  "Figma",
+  "AI",
+];

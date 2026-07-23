@@ -90,7 +90,8 @@ function toRow(form) {
     solution: form.solution || null,
     role: form.role || null,
     architecture: form.architecture || null,
-    cover_image: form.cover_image || null,
+    // Accepte `cover_image` (formulaire) ou `image` (objet normalise/import).
+    cover_image: form.cover_image || form.image || null,
     technologies: form.technologies || [],
     features: form.features || [],
     challenges: form.challenges || [],

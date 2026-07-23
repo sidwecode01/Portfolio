@@ -54,11 +54,39 @@ tant que la table `projects` est vide. Une fois Supabase configuré, va sur
 le gestionnaire de projets pour tous les insérer d'un coup dans la base.
 Ensuite tu gères tout depuis l'admin.
 
-## 6. Utilisation
+## 6. Déploiement sur Vercel (métriques + provenance par pays)
+
+Les visites sont enregistrées par une **fonction serverless Vercel**
+([`api/track.js`](api/track.js)) qui récupère le pays depuis l'en-tête natif
+`x-vercel-ip-country` (précis, gratuit, non blocable) et insère en base avec la
+clé `service_role`. L'insertion publique directe est **fermée** côté RLS.
+
+1. Importe le repo dans Vercel → **New Project**.
+2. **Root Directory** : règle-le sur `portfolio` (le dossier de l'app).
+   Vercel détecte automatiquement Vite.
+3. **Environment Variables** (Project Settings → Environment Variables) :
+
+   | Nom | Valeur | Exposée au client ? |
+   |-----|--------|---------------------|
+   | `VITE_SUPABASE_URL` | URL du projet Supabase | oui (préfixe VITE_) |
+   | `VITE_SUPABASE_ANON_KEY` | clé **anon** | oui |
+   | `SUPABASE_URL` | même URL Supabase | **non** |
+   | `SUPABASE_SERVICE_ROLE_KEY` | clé **service_role** | **non** |
+
+   > ⚠️ Ne préfixe **jamais** `SUPABASE_SERVICE_ROLE_KEY` par `VITE_` :
+   > cela l'exposerait dans le bundle client. C'est une clé secrète toute-puissante.
+
+4. Déploie. La provenance par pays apparaît dans `/admin` au fil des visites.
+
+> **En local** (`npm run dev`), la route `/api/track` n'existe pas : les visites
+> ne sont donc pas enregistrées en dev (l'appel échoue en silence, sans casser
+> le site). Pour tester les fonctions localement : `npx vercel dev`.
+
+## 7. Utilisation
 
 - **Site public** : `/` — les projets sont chargés depuis Supabase.
 - **Login admin** : `/admin/login`
-- **Dashboard métriques** : `/admin`
+- **Dashboard métriques** : `/admin` (vues, visiteurs uniques, provenance par pays).
 - **Gestion des projets** : `/admin/projects` (ajout / édition / suppression,
   upload d'images ou de vidéos, ou simple collage de liens YouTube / externes).
 
@@ -66,6 +94,8 @@ Ensuite tu gères tout depuis l'admin.
 
 - La clé `anon` est publique (elle est faite pour être exposée côté front) ;
   la sécurité repose sur les règles **RLS** définies dans le schéma SQL.
-- Seuls les utilisateurs **authentifiés** peuvent écrire dans `projects`,
-  uploader des médias et lire les métriques.
-- N'expose **jamais** ta clé `service_role`.
+- Seuls les utilisateurs **admin** (liste blanche `public.admins`) peuvent écrire
+  dans `projects`, uploader des médias et lire les métriques.
+- Les visites ne peuvent être écrites que par la fonction serveur
+  (clé `service_role`) : personne ne peut fausser les stats depuis le navigateur.
+- N'expose **jamais** ta clé `service_role` côté client (pas de préfixe `VITE_`).

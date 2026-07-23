@@ -9,6 +9,7 @@ import {
 } from "../../lib/projectsRepo";
 import { slugify } from "../../utils/slugify";
 import { guessMediaType } from "../../utils/media";
+import TechSelector from "../../components/admin/TechSelector";
 
 const EMPTY = {
   title: "",
@@ -305,9 +306,13 @@ export default function ProjectForm() {
         {/* --- Technologies --- */}
         <section className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
           <h2 className="text-white font-semibold">Technologies</h2>
-          <Field label="Une technologie par ligne" hint="Ex: React, Laravel, ...">
-            <textarea rows={4} className={inputCls} value={arrayToLines(form.technologies)} onChange={(e) => set("technologies", linesToArray(e.target.value))} />
-          </Field>
+          <p className="text-xs text-slate-500 -mt-2">
+            Clique sur une techno pour l'ajouter. Tu peux aussi en rechercher ou en creer une.
+          </p>
+          <TechSelector
+            value={form.technologies}
+            onChange={(techs) => set("technologies", techs)}
+          />
         </section>
 
         {/* --- Etude de cas (champs detailles) --- */}

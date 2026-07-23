@@ -1,4 +1,4 @@
-import { getVideoEmbed } from "../utils/media";
+import { getVideoEmbed, withPlaceholder, onImageError } from "../utils/media";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 // Affiche un media (image, video ou lien) dans la galerie du projet.
@@ -44,7 +44,8 @@ function MediaItem({ item, index, title }) {
   return (
     <div className="rounded-2xl overflow-hidden border border-gray-100">
       <img
-        src={url}
+        src={withPlaceholder(url)}
+        onError={onImageError}
         alt={label || `${title} ${index + 1}`}
         loading="lazy"
         decoding="async"
