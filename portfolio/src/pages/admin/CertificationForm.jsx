@@ -7,6 +7,7 @@ import {
   getCertificationById,
   uploadCertificationImage,
 } from "../../lib/certificationsRepo";
+import TechSelector from "../../components/admin/TechSelector";
 
 const EMPTY = {
   name: "",
@@ -14,6 +15,8 @@ const EMPTY = {
   year: "",
   credentialUrl: "",
   image: "",
+  description: "",
+  technologies: [],
   sortOrder: 0,
 };
 
@@ -121,9 +124,23 @@ export default function CertificationForm() {
           <Field label="Lien de verification" hint="URL publique du certificat (optionnel).">
             <input className={inputCls} value={form.credentialUrl} onChange={(e) => set("credentialUrl", e.target.value)} placeholder="https://..." />
           </Field>
+          <Field label="Courte description" hint="Une phrase qui resume la formation (affichee sur la carte).">
+            <textarea rows={2} className={inputCls} value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Ex: Formation intensive couvrant le developpement FullStack moderne." />
+          </Field>
           <Field label="Ordre d'affichage">
             <input type="number" className={inputCls} value={form.sortOrder} onChange={(e) => set("sortOrder", e.target.value)} />
           </Field>
+        </section>
+
+        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <h2 className="text-white font-semibold">Technologies couvertes</h2>
+          <p className="text-xs text-slate-500 -mt-2">
+            Affichees en tags sur la carte. Clique pour ajouter.
+          </p>
+          <TechSelector
+            value={form.technologies}
+            onChange={(techs) => set("technologies", techs)}
+          />
         </section>
 
         <section className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">

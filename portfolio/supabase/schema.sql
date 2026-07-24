@@ -193,10 +193,16 @@ create table if not exists public.certifications (
   year           text,                       -- annee ou date d'obtention
   credential_url text,                       -- lien de verification du certificat
   image          text,                       -- logo / badge (URL, optionnel)
+  description    text,                       -- courte description de la formation
+  technologies   text[] not null default '{}', -- tags technos couvertes
   sort_order     integer not null default 0,
   created_at     timestamptz not null default now(),
   updated_at     timestamptz not null default now()
 );
+
+-- Pour les bases deja creees avant l'ajout de ces colonnes :
+alter table public.certifications add column if not exists description  text;
+alter table public.certifications add column if not exists technologies text[] not null default '{}';
 
 create index if not exists certifications_sort_idx on public.certifications (sort_order);
 

@@ -10,6 +10,8 @@ export function normalizeCertification(row) {
     year: row.year || "",
     credentialUrl: row.credential_url || "",
     image: row.image || "",
+    description: row.description || "",
+    technologies: row.technologies || [],
     sortOrder: row.sort_order ?? 0,
   };
 }
@@ -37,6 +39,8 @@ function toRow(form) {
     year: form.year || null,
     credential_url: form.credentialUrl || null,
     image: form.image || null,
+    description: form.description || null,
+    technologies: form.technologies || [],
     sort_order: Number(form.sortOrder) || 0,
   };
 }
