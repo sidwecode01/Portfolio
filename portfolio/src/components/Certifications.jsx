@@ -1,37 +1,27 @@
-import { useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaCertificate, FaExternalLinkAlt } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaCertificate, FaExternalLinkAlt } from "react-icons/fa";
 import { useCertifications } from "../hooks/useCertifications";
-import { useReveal } from "../hooks/useReveal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ------------------------------------------------------------------ */
-/*  Carrousel en eventail — inspire des galeries incurvees :           */
-/*  bandeau creme, cartes inclinees selon leur position, fleches.      */
+/*  Certifications animees avec GSAP :                                 */
+/*  - entree en cascade au scroll (ScrollTrigger)                      */
+/*  - defilement infini automatique (marquee), pause au survol         */
+/*  Aucun bouton : tout est porte par l'animation.                     */
 /* ------------------------------------------------------------------ */
 
-const CARD_W = 288; // largeur d'une carte (w-72)
-const GAP = 24;     // gap-6
-const VISIBLE = 3;  // cartes pleinement visibles sur desktop
+// Nombre de copies de la liste pour un bouclage sans couture.
+const COPIES = 3;
+// Couleur du bandeau (blue-950) pour les fondus lateraux.
+const BAND = "#172554";
 
-// Inclinaison / decalage vertical selon la distance au centre :
-// centre droit et haut, cartes externes pivotees et legerement plus basses.
-function tiltFor(offset) {
-  const clamped = Math.max(-2.5, Math.min(2.5, offset));
-  return {
-    rotate: clamped * 4,               // degres
-    y: Math.abs(clamped) * 16,         // px vers le bas
-  };
-}
-
-function CertificationCard({ certification, offset }) {
+function CertificationCard({ certification }) {
   const { name, issuer, year, credentialUrl, image, description, technologies } = certification;
-  const { rotate, y } = tiltFor(offset);
-
   return (
-    <article
-      className="flex-none w-72 overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-30px_rgba(2,6,23,0.6)] transition-transform duration-500 ease-out"
-      style={{ transform: `translateY(${y}px) rotate(${rotate}deg)` }}
-    >
-      {/* Visuel du certificat */}
+    <article className="cert-card w-80 flex-none overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-30px_rgba(2,6,23,0.6)]">
       <div className="h-44 w-full overflow-hidden bg-blue-50">
         {image ? (
           <img src={image} alt={name} loading="lazy" className="h-full w-full object-cover" />
@@ -87,30 +77,75 @@ function CertificationCard({ certification, offset }) {
 
 export default function Certifications() {
   const { certifications, loading } = useCertifications();
-  const { ref, visible } = useReveal();
-  const [index, setIndex] = useState(0);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const marqueeRef = useRef(null);
+
+  useEffect(() => {
+    if (loading || certifications.length === 0) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ctx = gsap.context(() => {
+      // Entree : en-tete puis cartes en cascade, au moment ou la section
+      // arrive a l'ecran.
+      gsap.fromTo(
+        ".cert-head",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
+        }
+      );
+      gsap.fromTo(
+        ".cert-card",
+        { opacity: 0, y: 48, rotate: 2 },
+        {
+          opacity: 1,
+          y: 0,
+          rotate: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.06,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+        }
+      );
+
+      // Defilement infini : la piste contient COPIES exemplaires de la liste;
+      // on la deplace d'un exemplaire complet puis GSAP boucle sans couture.
+      if (!prefersReduced) {
+        marqueeRef.current = gsap.to(trackRef.current, {
+          xPercent: -100 / COPIES,
+          ease: "none",
+          duration: Math.max(18, certifications.length * 9),
+          repeat: -1,
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [loading, certifications]);
 
   if (loading || certifications.length === 0) return null;
 
-  const canScroll = certifications.length > VISIBLE;
-  const maxIndex = Math.max(0, certifications.length - VISIBLE);
-  const prev = () => setIndex((i) => Math.max(0, i - 1));
-  const next = () => setIndex((i) => Math.min(maxIndex, i + 1));
+  // Liste dupliquee pour le bouclage.
+  const loopItems = Array.from({ length: COPIES }).flatMap((_, copy) =>
+    certifications.map((c) => ({ ...c, _key: `${copy}-${c.id}` }))
+  );
 
-  // Centre visuel : slot du milieu de la fenetre (mode defilement),
-  // ou milieu de la liste (mode statique centre).
-  const center = canScroll ? index + (VISIBLE - 1) / 2 : (certifications.length - 1) / 2;
+  const pause = () => marqueeRef.current?.pause();
+  const play = () => marqueeRef.current?.play();
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       aria-labelledby="certifications-title"
-      className={`mb-24 overflow-hidden rounded-[2.5rem] bg-blue-950 px-4 py-12 md:py-14 transition-all duration-700 ease-out motion-reduce:transition-none ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      className="mb-24 overflow-hidden rounded-[2.5rem] bg-blue-950 px-0 py-12 md:py-14"
     >
       {/* En-tete */}
-      <div className="mx-auto max-w-xl text-center">
+      <div className="cert-head mx-auto max-w-xl px-5 text-center">
         <h2 id="certifications-title" className="text-3xl font-bold tracking-tight text-white">
           Certifications
         </h2>
@@ -119,47 +154,34 @@ export default function Certifications() {
         </p>
       </div>
 
-      {/* Galerie en eventail */}
-      <div className="mt-10 overflow-hidden px-2 pb-6 pt-4">
+      {/* Marquee infini */}
+      <div
+        className="relative mt-10"
+        onMouseEnter={pause}
+        onMouseLeave={play}
+        onTouchStart={pause}
+        onTouchEnd={play}
+      >
+        {/* Fondus lateraux pour une entree/sortie douce des cartes */}
         <div
-          className={`flex gap-6 transition-transform duration-500 ease-out ${
-            canScroll ? "" : "justify-center"
-          }`}
-          style={canScroll ? { transform: `translateX(-${index * (CARD_W + GAP)}px)` } : undefined}
-        >
-          {certifications.map((certification, i) => (
-            <CertificationCard
-              key={certification.id}
-              certification={certification}
-              offset={i - center}
-            />
-          ))}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28"
+          style={{ backgroundImage: `linear-gradient(to right, ${BAND}, transparent)` }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28"
+          style={{ backgroundImage: `linear-gradient(to left, ${BAND}, transparent)` }}
+        />
+
+        <div className="overflow-hidden py-4">
+          <div ref={trackRef} className="flex w-max gap-6 pr-6">
+            {loopItems.map((certification) => (
+              <CertificationCard key={certification._key} certification={certification} />
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Navigation */}
-      {canScroll && (
-        <div className="mt-6 flex items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={prev}
-            disabled={index === 0}
-            aria-label="Certifications précédentes"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-blue-950 shadow-md transition hover:bg-blue-100 disabled:cursor-default disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <FaArrowLeft className="h-4 w-4" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            disabled={index === maxIndex}
-            aria-label="Certifications suivantes"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-blue-950 shadow-md transition hover:bg-blue-100 disabled:cursor-default disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <FaArrowRight className="h-4 w-4" aria-hidden="true" />
-          </button>
-        </div>
-      )}
     </section>
   );
 }
