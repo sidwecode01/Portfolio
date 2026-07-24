@@ -2,6 +2,7 @@ import { FaGraduationCap, FaSchool, FaUniversity, FaBriefcase } from "react-icon
 
 export default function Experience() {
     const formations = [
+        { title: "Stage developpeur (6 mois)", period: "Fevrier - Aout 2026", place: "MLP Business", Icon: FaBriefcase },
         { title: "Licence 3 (1 an)", period: "2025-2026", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
         { title: "Licence 2 (1 an)", period: "2024-2025", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
         { title: "Licence 1 (1 an)", period: "2023-2024", place: "Universite Virtuelle de Cote d'Ivoire", Icon: FaUniversity },
@@ -64,7 +65,7 @@ export default function Experience() {
                             </div>
                             <div>
                                 <h2 className="font-semibold text-lg">Stage en cours</h2>
-                                <p className="text-sm text-white/80">MPL BUSINESS</p>
+                                <p className="text-sm text-white/80">MLP BUSINESS</p>
                             </div>
                         </div>
                     </div>

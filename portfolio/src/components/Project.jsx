@@ -5,10 +5,10 @@ import { useProjects } from "../hooks/useProjects";
 import { withPlaceholder, onImageError } from "../utils/media";
 
 const ProjectCard = ({ image, title, slug }) => (
-  <div className="group">
-    <Link to={`/projet/${slug}`} aria-label={`Voir le projet ${title}`}>
-      <div className="relative bg-gray-900/80 rounded-2xl overflow-hidden shadow-[0_18px_60px_-40px_rgba(15,23,42,0.7)] transition-transform duration-300 group-hover:-translate-y-1">
-        <div className="aspect-[4/3] overflow-hidden">
+  <div className="group h-full">
+    <Link to={`/projet/${slug}`} aria-label={`Voir le projet ${title}`} className="block h-full">
+      <div className="relative h-full flex flex-col bg-gray-900/80 rounded-2xl overflow-hidden shadow-[0_18px_60px_-40px_rgba(15,23,42,0.7)] transition-transform duration-300 group-hover:-translate-y-1">
+        <div className="aspect-[4/3] overflow-hidden shrink-0">
           <img
             src={withPlaceholder(image)}
             onError={onImageError}
@@ -18,9 +18,11 @@ const ProjectCard = ({ image, title, slug }) => (
             className="object-cover h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
           />
         </div>
-        <div className="p-5">
-          <h2 className="text-lg md:text-xl font-semibold text-white leading-snug">{title}</h2>
-          <span className="text-blue-200 inline-flex items-center mt-3 text-sm">
+        <div className="p-5 flex flex-col flex-1">
+          <h2 className="text-lg md:text-xl font-semibold text-white leading-snug line-clamp-2" title={title}>
+            {title}
+          </h2>
+          <span className="text-blue-200 inline-flex items-center mt-auto pt-3 text-sm">
             Ouvrir le projet
             <svg
               fill="none"
@@ -59,8 +61,8 @@ export default function Projects() {
     <section id="projects" className="text-gray-200 bg-blue-950">
       <div className="container px-5 py-16 mx-auto">
         <div data-aos="fade-up" data-aos-delay="300" className="flex flex-col">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
-            <h1 className="text-white font-semibold text-3xl md:text-4xl">Mes projets</h1>
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-12 mb-10">
+            <h1 className="text-white font-semibold text-3xl md:text-4xl shrink-0">Mes projets</h1>
             <p className="lg:max-w-xl leading-relaxed text-base md:text-lg">
               Chaque projet presente ci-dessous reflete mon parcours, mes apprentissages et ma passion pour le developpement. J'ai explore differentes technologies pour creer des experiences utiles, intuitives et modernes.
             </p>
