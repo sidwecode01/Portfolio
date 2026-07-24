@@ -1,4 +1,5 @@
 import { FaGraduationCap, FaSchool, FaUniversity, FaBriefcase } from "react-icons/fa";
+import Certifications from "./Certifications";
 
 export default function Experience() {
     const formations = [
@@ -39,6 +40,8 @@ export default function Experience() {
                         </div>
                     ))}
                 </div>
+
+                <Certifications />
 
                 <div className="flex flex-col text-center w-full mb-20">
                     <h1 data-aos="fade-up" data-aos-delay="300" className="sm:text-3xl text-3xl font-bold">Experience</h1>

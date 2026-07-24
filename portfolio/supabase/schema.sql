@@ -184,6 +184,54 @@ create policy "media_admin_delete"
   using (bucket_id = 'project-media' and public.is_admin());
 
 -- ============================================================
+--  6. Table des certifications
+-- ============================================================
+create table if not exists public.certifications (
+  id             uuid primary key default gen_random_uuid(),
+  name           text not null,
+  issuer         text,                       -- organisme (Coursera, Epitech...)
+  year           text,                       -- annee ou date d'obtention
+  credential_url text,                       -- lien de verification du certificat
+  image          text,                       -- logo / badge (URL, optionnel)
+  sort_order     integer not null default 0,
+  created_at     timestamptz not null default now(),
+  updated_at     timestamptz not null default now()
+);
+
+create index if not exists certifications_sort_idx on public.certifications (sort_order);
+
+drop trigger if exists certifications_set_updated_at on public.certifications;
+create trigger certifications_set_updated_at
+  before update on public.certifications
+  for each row execute function public.set_updated_at();
+
+alter table public.certifications enable row level security;
+
+-- Lecture publique, ecriture reservee aux admins de la liste blanche.
+drop policy if exists "certifications_public_read" on public.certifications;
+create policy "certifications_public_read"
+  on public.certifications for select
+  using (true);
+
+drop policy if exists "certifications_admin_insert" on public.certifications;
+create policy "certifications_admin_insert"
+  on public.certifications for insert
+  to authenticated
+  with check (public.is_admin());
+
+drop policy if exists "certifications_admin_update" on public.certifications;
+create policy "certifications_admin_update"
+  on public.certifications for update
+  to authenticated
+  using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "certifications_admin_delete" on public.certifications;
+create policy "certifications_admin_delete"
+  on public.certifications for delete
+  to authenticated
+  using (public.is_admin());
+
+-- ============================================================
 --  Termine. Etapes finales pour DEVENIR admin :
 --
 --  1) Cree ton compte : Dashboard > Authentication > Users > Add user

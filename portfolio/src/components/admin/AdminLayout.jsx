@@ -1,10 +1,11 @@
 import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
-import { FaChartLine, FaFolderOpen, FaSignOutAlt, FaExternalLinkAlt } from "react-icons/fa";
+import { FaChartLine, FaFolderOpen, FaSignOutAlt, FaExternalLinkAlt, FaCertificate } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth";
 
 const navItems = [
   { to: "/admin", end: true, label: "Metriques", icon: FaChartLine },
   { to: "/admin/projects", end: false, label: "Projets", icon: FaFolderOpen },
+  { to: "/admin/certifications", end: false, label: "Certifications", icon: FaCertificate },
 ];
 
 export default function AdminLayout() {

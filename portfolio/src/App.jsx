@@ -9,6 +9,8 @@ import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
 import ProjectsList from './pages/admin/ProjectsList';
 import ProjectForm from './pages/admin/ProjectForm';
+import CertificationsList from './pages/admin/CertificationsList';
+import CertificationForm from './pages/admin/CertificationForm';
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
             <Route path="projects" element={<ProjectsList />} />
             <Route path="projects/new" element={<ProjectForm />} />
             <Route path="projects/:id/edit" element={<ProjectForm />} />
+            <Route path="certifications" element={<CertificationsList />} />
+            <Route path="certifications/new" element={<CertificationForm />} />
+            <Route path="certifications/:id/edit" element={<CertificationForm />} />
           </Route>
         </Routes>
       </AuthProvider>
